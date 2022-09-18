@@ -37,6 +37,15 @@ async function init() {
   data.forEach((element) => {
     addMessageToPage(element);
   });
+
+  // Check for new rows on message table in DB
+  supabase
+    .from('messages')
+    .on('INSERT', (message) => {
+      console.log('Message received...', message);
+      addMessageToPage(message.new);
+    })
+    .subscribe();
 }
 
 init();
