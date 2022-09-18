@@ -27,9 +27,32 @@ function addMessageToPage(message) {
           </div>
         `;
   messagesElement.append(element);
+
+  setTimeout(() => {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }, 300);
 }
 
+const form = document.querySelector('form');
+
 async function init() {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const message = {
+      username: formData.get('username'),
+      content: formData.get('content'),
+    };
+    // Insert new message
+    console.log(message);
+    supabase
+      .from('messages')
+      .insert([message])
+      .then(() => {
+        console.log('Message saved to DB');
+      });
+  });
+
   let { data, error } = await supabase.from('messages').select('*');
 
   console.log(data);

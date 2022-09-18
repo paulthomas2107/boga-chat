@@ -16,8 +16,30 @@
       <ul class="list-unstyled" id="messages">
         <!-- created dynamically by javascript-->
       </ul>
-      <form class="form">
-        <h1>This is the form....</h1>
+      <form>
+        <fieldset>
+          <div class="form-group">
+            <label for="username" class="form-label mt-4">Username</label>
+            <input
+              name="username"
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Enter Username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="content" class="form-label mt-4">Message</label>
+            <textarea
+              name="content"
+              class="form-control"
+              rows="2"
+              id="content"
+              placeholder="Enter message"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </fieldset>
       </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>

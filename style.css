@@ -30,7 +30,8 @@ body {
 
 #messages {
     height: 80%;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 form {
