@@ -14,3 +14,26 @@
     text-align: right;
     font-size: 12px;
 }
+
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+#messages {
+    height: 80%;
+    overflow: scroll;
+}
+
+form {
+    height: 20%;
+
+}
