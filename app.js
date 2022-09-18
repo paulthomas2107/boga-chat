@@ -7,6 +7,12 @@ supabase = createClient(
 
 const messagesElement = document.querySelector('#messages');
 
+function sanitizeText(text) {
+  return DOMPurify.sanitize(text, {
+    ALLOWED_TAGS: [],
+  });
+}
+
 function addMessageToPage(message) {
   const element = document.createElement('li');
   element.classList.add('card', 'm-2');
@@ -15,14 +21,16 @@ function addMessageToPage(message) {
             <div class="row">
               <div class="col-sm-2 avatar-container">
                 <img src="monkey3.png" width="100" height="100" />
-                <p class="avatar-username">${message.username}</p>
+                <p class="avatar-username">${sanitizeText(message.username)}</p>
               </div>
               <div class="col-sm-10">
-                <p>${message.content}</p>
+                <p>${sanitizeText(message.content)}</p>
               </div>
             </div>
             <div class="row">
-              <p class="col-sm-12 timestamp">${message.created_at}</p>
+              <p class="col-sm-12 timestamp">${sanitizeText(
+                message.created_at
+              )}</p>
             </div>
           </div>
         `;
@@ -34,6 +42,7 @@ function addMessageToPage(message) {
 }
 
 const form = document.querySelector('form');
+const contentElement = document.querySelector('#content');
 
 async function init() {
   form.addEventListener('submit', (event) => {
@@ -43,6 +52,9 @@ async function init() {
       username: formData.get('username'),
       content: formData.get('content'),
     };
+    // Clear last typed message
+    contentElement.value = '';
+
     // Insert new message
     console.log(message);
     supabase
